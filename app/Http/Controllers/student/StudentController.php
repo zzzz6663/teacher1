@@ -25,6 +25,7 @@ class StudentController extends Controller
     public function  logout(){
         Auth::logout();
         alert()->success('شما با موفقیت از حساب کاربری خود خارج شدید ');
+        // log
         return \redirect(route('home.teacher.list'));
     }
     public function  fave_teachers(User $user){

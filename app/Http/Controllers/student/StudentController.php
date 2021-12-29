@@ -251,10 +251,16 @@ class StudentController extends Controller
         return back() ;
     }
     public function  save_avatar(Request  $request ,User $user){
+        $data=$request->validate([
+            "avatar"  => "image|max:1024",
+        ]);
         $image=$request->file('avatar');
         $name_img= $user->id.'_avatar_'.'.'.$image->getClientOriginalExtension();
         $image->move(public_path('/src/avatar'),$name_img);
-
+        $path = public_path('/src/avatar/' . $name_img);
+        if (file_exists($path)) {
+            Image::make($path)->fit(300, 300)->save(public_path('/src/avatar/' . $name_img));
+        }
         $user->save_attr('avatar',$name_img);
         alert()->success('عکس شما با موقثیت به روز شد ');
         return back() ;

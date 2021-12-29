@@ -34,7 +34,7 @@
 <div id="site-content">
     @includeWhen( empty($header),'home.section.header_home')
     @yield('main_body')
-    @includeWhen( empty($footer),'home.section.footer_home')
+    {{-- @includeWhen( empty($footer),'home.section.footer_home') --}}
 </div>
 <script type="text/javascript" src="/home/js/jquery.mCustomScrollbar.min.js"></script>
 <script type="text/javascript" src="/home/js/nouislider.js"></script>

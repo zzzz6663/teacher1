@@ -295,31 +295,37 @@ class TeacherController extends Controller
 //       return response()->json([
 //           'url'=>21,
 //       ]);
-//            $data=$request->validate([
-//                'bg'=>'required|image|max:18000',
-//            ]);
-       $image = $request->bg;
+           $data=$request->validate([
+               'bg'=>'required|image|max:18000',
+           ]);
+    //    $image = $request->bg;
 
-       list($type, $image) = explode(';',$image);
-       list(, $image) = explode(',',$image);
+    //    list($type, $image) = explode(';',$image);
+    //    list(, $image) = explode(',',$image);
 
-       $image = base64_decode($image);
-       $image_name =$user->id.'_bg'.'_'.time().'.png';
-       file_put_contents(public_path('/src/bg/').$image_name, $image);
+    //    $image = base64_decode($image);
+    //    $image_name =$user->id.'_bg'.'_'.time().'.png';
+    //    file_put_contents(public_path('/src/bg/').$image_name, $image);
 
 //
-//       $image=$request->file('bg');
-//       $name_img= $user->id.'bg'.'.'.$image->getClientOriginalExtension();
-//       $image->move(public_path('/src/bg'),$name_img);
-//       $path = public_path('/src/bg/'.$name_img);
-//       if(file_exists($path)){
-//           Image::make($path)->crop(1200, 250)->save(public_path('/src/bg/'.$name_img));
-//       }
-       $user->save_attr('bg',$image_name);
+      $image=$request->file('bg');
+      $name_img= $user->id.'bg'.'.'.$image->getClientOriginalExtension();
+      $image->move(public_path('/src/bg'),$name_img);
+      $path = public_path('/src/bg/'.$name_img);
+      if(file_exists($path)){
+          Image::make($path)->fit(1200, 250)->save(public_path('/src/bg/'.$name_img));
+      }
+       $user->save_attr('bg',$name_img);
 //       alert()->success('عکس شما با موفقیت به روز شد ');
-       return response()->json([
-           'url'=>asset('/src/avatar/'.$image_name),
-       ]);
+    //    return response()->json([
+    //        'url'=>asset('/src/avatar/'.$image_name),
+    //    ]);
+    alert()->success('عکس شما با موفقیت به روز شد ');
+    if(!$user->check_active()){
+     return redirect()->route('teacher.level');
+    }
+
+     return back() ;
 
 //       return response()->json([
 //           'url'=>$name_img
@@ -332,9 +338,15 @@ class TeacherController extends Controller
        $data=$request->validate([
            "avatar"  => "image|max:1024",
        ]);
+
        $image=$request->file('avatar');
        $name_img= $user->id.'_avatar_'.'.'.$image->getClientOriginalExtension();
        $image->move(public_path('/src/avatar'),$name_img);
+          $path = public_path('/src/avatar/' . $name_img);
+        if (file_exists($path)) {
+            Image::make($path)->fit(300, 300)->save(public_path('/src/avatar/' . $name_img));
+        }
+
        $user->save_attr('avatar',$name_img);
        $user->save_attr('profile_plan','profile_plan');
        alert()->success('عکس شما با موفقیت به روز شد ');

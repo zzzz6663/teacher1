@@ -9,6 +9,18 @@
 @extends('master.home')
 @section('main_body')
 
+        <?php
+        function searchForId($id, $array) {
+      foreach ($array as $key => $val) {
+          if ($val['name'] === $id) {
+              return $val['value'];
+          }
+      }
+      return null;
+      }
+        $attr_list=$user->attributes()->get()->toArray();
+        ?>
+
     <!-- Start Teacher Section -->
     <div id="teacher-page" class="rows">
         <div class="container">
@@ -18,8 +30,8 @@
 
                         <div class="teacher-sidebar">
                             <div class="video">
-                                <video id="player" class="js-player" playsinline controls  data-poster="{{asset('/src/port_img/'.$user->attr('port_img'))}}">
-                                    <source src="{{asset('/src/port_vid/'.$user->attr('port_vid'))}}" type="video/mp4" />
+                                <video id="player" class="js-player" playsinline controls  data-poster="{{asset('/src/port_img/'.searchForId('port_img', $attr_list))}}">
+                                    <source src="{{asset('/src/port_vid/'.searchForId('port_vid', $attr_list))}}" type="video/mp4" />
 
                                 </video>
                             </div>
@@ -48,8 +60,8 @@
                                 <h4>رزرو جلسه آزمایشی</h4>
                                 <span class="text">
 										یکبار و به مدت 30 دقیقه
-                                    {{__('arr.'.$user->attr('freeclass'))}}
-                                    {{$user->attr('freeclass')=='nofree'?number_format( $user->attr('free_meeting_price')).' تومان ':''}}
+                                    {{__('arr.'.searchForId('freeclass', $attr_list))}}
+                                    {{searchForId('freeclass', $attr_list)=='nofree'?number_format( $usesearchForId('ee_meeting_price', $attr_list)).' تومان ':''}}
 									</span>
 {{--                                <button class="reserv-trial">--}}
 {{--                                    رزرو رایگان--}}
@@ -69,10 +81,10 @@
                         <!-- Start Teacher About -->
                         <div id="teacher-about">
                             <div class="top-header" >
-                                <div class="img" style="background: url('{{asset('/src/bg/'.$user->attr('bg'))}}');"></div>
+                                <div class="img" style="background: url('{{asset('/src/bg/'.searchForId('bg', $attr_list))}}');"></div>
                                 <div class="teacher-info">
                                     <div class="avatar">
-                                        <div class="teavatar" style="background: url('{{asset('/src/avatar/'.$user->attr('avatar'))}}');">
+                                        <div class="teavatar" style="background: url('{{asset('/src/avatar/'.searchForId('avatar', $attr_list))}}');">
                                         </div>
                                     </div>
 
@@ -155,7 +167,7 @@
                                         <div>
                                             <div class="teacher-expert">
                                                 <span class="title">تعداد دانشجویان :</span>
-                                                <span class="text">{{$user->count_student()}}  زبان آموز</span>
+                                                <span class="text">{{$user->students()}}  زبان آموز</span>
                                             </div>
                                         </div>
                                     </div>
@@ -575,46 +587,46 @@
                                             <div class="expert-box" {{$user->education_level()?'':'hidden'}}>
                                                 <label for="">سطوح تدریس</label>
                                                 <ul>
-                                                    <li class="{{$user->attr('Starter')?'':'disn'}}"><span class="expert-box-single">Starter</span></li>
-                                                    <li class="{{$user->attr('Elementary')?'':'disn'}}"><span class="expert-box-single">Elementary</span></li>
-                                                    <li class="{{$user->attr('Intermediate')?'':'disn'}}"><span class="expert-box-single">Intermediate</span></li>
-                                                    <li class="{{$user->attr('Advanced')?'':'disn'}}"><span class="expert-box-single">Advanced</span></li>
-                                                    <li class="{{$user->attr('Mastery')?'':'disn'}}"><span class="expert-box-single">Mastery</span></li>
-                                                    <li class="{{$user->attr('Upper_intermediate')?'':'disn'}}"><span class="expert-box-single">Upper Intermediate</span></li>
+                                                    <li class="{{searchForId('Starter', $attr_list)?'':'disn'}}"><span class="expert-box-single">Starter</span></li>
+                                                    <li class="{{searchForId('Elementary', $attr_list)?'':'disn'}}"><span class="expert-box-single">Elementary</span></li>
+                                                    <li class="{{searchForId('Intermediate', $attr_list)?'':'disn'}}"><span class="expert-box-single">Intermediate</span></li>
+                                                    <li class="{{searchForId('Advanced', $attr_list)?'':'disn'}}"><span class="expert-box-single">Advanced</span></li>
+                                                    <li class="{{searchForId('Mastery', $attr_list)?'':'disn'}}"><span class="expert-box-single">Mastery</span></li>
+                                                    <li class="{{searchForId('Upper_intermediate', $attr_list)?'':'disn'}}"><span class="expert-box-single">Upper Intermediate</span></li>
                                                 </ul>
                                             </div>
                                             <div class="expert-box" {{$user->teacher_race()?'':'hidden'}}>
                                                 <label for="">لهجه مدرس</label>
                                                 <ul>
-                                                    <li class="{{$user->attr('American_Accent')?'':'disn'}}"><span class="expert-box-single">American Accent</span></li>
-                                                    <li class="{{$user->attr('British_Accent')?'':'disn'}}"><span class="expert-box-single">British Accent</span></li>
-                                                    <li class="{{$user->attr('Australian_Accent')?'':'disn'}}"><span class="expert-box-single">Australian Accent</span></li>
-                                                    <li class="{{$user->attr('Indian_Accent')?'':'disn'}}"><span class="expert-box-single">Indian Accent</span></li>
-                                                    <li class="{{$user->attr('Irish_Accent')?'':'disn'}}"><span class="expert-box-single">Irish Accent</span></li>
-                                                    <li class="{{$user->attr('Scottish_Accent')?'':'disn'}}"><span class="expert-box-single">Scottish Accent</span></li>
-                                                    <li class="{{$user->attr('South_African_Accent')?'':'disn'}}"><span class="expert-box-single">South African Accent</span></li>
+                                                    <li class="{{searchForId('American_Accent', $attr_list)?'':'disn'}}"><span class="expert-box-single">American Accent</span></li>
+                                                    <li class="{{searchForId('British_Accent', $attr_list)?'':'disn'}}"><span class="expert-box-single">British Accent</span></li>
+                                                    <li class="{{searchForId('Australian_Accent', $attr_list)?'':'disn'}}"><span class="expert-box-single">Australian Accent</span></li>
+                                                    <li class="{{searchForId('Indian_Accent', $attr_list)?'':'disn'}}"><span class="expert-box-single">Indian Accent</span></li>
+                                                    <li class="{{searchForId('Irish_Accent', $attr_list)?'':'disn'}}"><span class="expert-box-single">Irish Accent</span></li>
+                                                    <li class="{{searchForId('Scottish_Accent', $attr_list)?'':'disn'}}"><span class="expert-box-single">Scottish Accent</span></li>
+                                                    <li class="{{searchForId('South_African_Accent', $attr_list)?'':'disn'}}"><span class="expert-box-single">South African Accent</span></li>
 
                                                 </ul>
                                             </div>
                                             <div class="expert-box" {{$user->teacher_age_education_level()?'':'hidden'}}>
                                                 <label for="">سن</label>
                                                 <ul>
-                                                    <li class="{{$user->attr('Children')?'':'disn'}}"><span class="expert-box-single">Children (4-11)</span></li>
-                                                    <li class="{{$user->attr('Teenagers')?'':'disn'}}"><span class="expert-box-single">Teenagers (12-18)</span></li>
-                                                    <li class="{{$user->attr('Adults')?'':'disn'}}"><span class="expert-box-single">Adults (18+)</span></li>
+                                                    <li class="{{searchForId('Children', $attr_list)?'':'disn'}}"><span class="expert-box-single">Children (4-11)</span></li>
+                                                    <li class="{{searchForId('Teenagers', $attr_list)?'':'disn'}}"><span class="expert-box-single">Teenagers (12-18)</span></li>
+                                                    <li class="{{searchForId('Adults', $attr_list)?'':'disn'}}"><span class="expert-box-single">Adults (18+)</span></li>
                                                 </ul>
                                             </div>
                                             <div class="expert-box" {{$user->teacher_class_content()?'':'hidden'}}>
                                                 <label for="">کلاس شامل چه مواردی میشود</label>
                                                 <ul>
-                                                    <li class="{{$user->attr('Curriculum')?'':'disn'}}"><span class="expert-box-single">Curriculum</span></li>
-                                                    <li class="{{$user->attr('Homework')?'':'disn'}}"><span class="expert-box-single">Homework</span></li>
-                                                    <li class="{{$user->attr('Learning_Materials')?'':'disn'}}"><span class="expert-box-single">Learning Materials</span></li>
-                                                    <li class="{{$user->attr('Writing_Exercises')?'':'disn'}}"><span class="expert-box-single">Writing Exercises</span></li>
-                                                    <li class="{{$user->attr('Lesson_Plans')?'':'disn'}}"><span class="expert-box-single">Lesson Plans</span></li>
-                                                    <li class="{{$user->attr('Proficiency_Assessment')?'':'disn'}}"><span class="expert-box-single">Proficiency Assessment</span></li>
-                                                    <li class="{{$user->attr('Quizzes_Tests')?'':'disn'}}"><span class="expert-box-single">Quizzes Tests</span></li>
-                                                    <li class="{{$user->attr('Reading_Exercises')?'':'disn'}}"><span class="expert-box-single">Reading Exercises</span></li>
+                                                    <li class="{{searchForId('Curriculum', $attr_list)?'':'disn'}}"><span class="expert-box-single">Curriculum</span></li>
+                                                    <li class="{{searchForId('Homework', $attr_list)?'':'disn'}}"><span class="expert-box-single">Homework</span></li>
+                                                    <li class="{{searchForId('Learning_Materials', $attr_list)?'':'disn'}}"><span class="expert-box-single">Learning Materials</span></li>
+                                                    <li class="{{searchForId('Writing_Exercises', $attr_list)?'':'disn'}}"><span class="expert-box-single">Writing Exercises</span></li>
+                                                    <li class="{{searchForId('Lesson_Plans', $attr_list)?'':'disn'}}"><span class="expert-box-single">Lesson Plans</span></li>
+                                                    <li class="{{searchForId('Proficiency_Assessment', $attr_list)?'':'disn'}}"><span class="expert-box-single">Proficiency Assessment</span></li>
+                                                    <li class="{{searchForId('Quizzes_Tests', $attr_list)?'':'disn'}}"><span class="expert-box-single">Quizzes Tests</span></li>
+                                                    <li class="{{searchForId('Reading_Exercises', $attr_list)?'':'disn'}}"><span class="expert-box-single">Reading Exercises</span></li>
 
 
 
@@ -623,19 +635,19 @@
                                             <div class="expert-box" {{$user->teacher_class_subject()?'':'hidden'}}>
                                                 <label for="">موضوعات</label>
                                                 <ul>
-                                                    <li class="{{$user->attr('Business_English')?'':'disn'}}"><span class="expert-box-single">Business English</span></li>
-                                                    <li class="{{$user->attr('Interview_Preparation')?'':'disn'}}"><span class="expert-box-single">Interview Preparation</span></li>
-                                                    <li class="{{$user->attr('Reading_Comprehension')?'':'disn'}}"><span class="expert-box-single">Reading Comprehension</span></li>
-                                                    <li class="{{$user->attr('Listening_Comprehension')?'':'disn'}}"><span class="expert-box-single">Listening Comprehension</span></li>
-                                                    <li class="{{$user->attr('Speaking_Practice')?'':'disn'}}"><span class="expert-box-single">Speaking Practice</span></li>
-                                                    <li class="{{$user->attr('Writing_Correction')?'':'disn'}}"><span class="expert-box-single">Writing Correction</span></li>
-                                                    <li class="{{$user->attr('Vocabulary_Development')?'':'disn'}}"><span class="expert-box-single">Vocabulary Development</span></li>
-                                                    <li class="{{$user->attr('Grammar_Development')?'':'disn'}}"><span class="expert-box-single">Grammar Development</span></li>
-                                                    <li class="{{$user->attr('Academic_English')?'':'disn'}}"><span class="expert-box-single">Academic English</span></li>
-                                                    <li class="{{$user->attr('Accent_Reduction')?'':'disn'}}"><span class="expert-box-single">Accent Reduction</span></li>
-                                                    <li class="{{$user->attr('Phonetics')?'':'disn'}}"><span class="expert-box-single">Phonetics</span></li>
-                                                    <li class="{{$user->attr('Colloquial_English')?'':'disn'}}"><span class="expert-box-single">Colloquial English</span></li>
-                                                    <li class="{{$user->attr('Phonetics')?'':'disn'}}"><span class="expert-box-single">Phonetics</span></li>
+                                                    <li class="{{searchForId('Business_English', $attr_list)?'':'disn'}}"><span class="expert-box-single">Business English</span></li>
+                                                    <li class="{{searchForId('Interview_Preparation', $attr_list)?'':'disn'}}"><span class="expert-box-single">Interview Preparation</span></li>
+                                                    <li class="{{searchForId('Reading_Comprehension', $attr_list)?'':'disn'}}"><span class="expert-box-single">Reading Comprehension</span></li>
+                                                    <li class="{{searchForId('Listening_Comprehension', $attr_list)?'':'disn'}}"><span class="expert-box-single">Listening Comprehension</span></li>
+                                                    <li class="{{searchForId('Speaking_Practice', $attr_list)?'':'disn'}}"><span class="expert-box-single">Speaking Practice</span></li>
+                                                    <li class="{{searchForId('Writing_Correction', $attr_list)?'':'disn'}}"><span class="expert-box-single">Writing Correction</span></li>
+                                                    <li class="{{searchForId('Vocabulary_Development', $attr_list)?'':'disn'}}"><span class="expert-box-single">Vocabulary Development</span></li>
+                                                    <li class="{{searchForId('Grammar_Development', $attr_list)?'':'disn'}}"><span class="expert-box-single">Grammar Development</span></li>
+                                                    <li class="{{searchForId('Academic_English', $attr_list)?'':'disn'}}"><span class="expert-box-single">Academic English</span></li>
+                                                    <li class="{{searchForId('Accent_Reduction', $attr_list)?'':'disn'}}"><span class="expert-box-single">Accent Reduction</span></li>
+                                                    <li class="{{searchForId('Phonetics', $attr_list)?'':'disn'}}"><span class="expert-box-single">Phonetics</span></li>
+                                                    <li class="{{searchForId('Colloquial_English', $attr_list)?'':'disn'}}"><span class="expert-box-single">Colloquial English</span></li>
+                                                    <li class="{{searchForId('Phonetics', $attr_list)?'':'disn'}}"><span class="expert-box-single">Phonetics</span></li>
 
                                                 </ul>
                                             </div>
@@ -648,20 +660,20 @@
                                                 <label for="">  انگلیسی:
                                                 </label>
                                                 <ul>
-                                                    <li class="{{$user->attr('TOEFL')?'':'disn'}}"><span class="expert-box-single">TOEFL</span></li>
-                                                    <li class="{{$user->attr('IELTS')?'':'disn'}}"><span class="expert-box-single">IELTS</span></li>
-                                                    <li class="{{$user->attr('PTE')?'':'disn'}}"><span class="expert-box-single">PTE</span></li>
-                                                    <li class="{{$user->attr('GRE')?'':'disn'}}"><span class="expert-box-single">GRE</span></li>
-                                                    <li class="{{$user->attr('CELPIP')?'':'disn'}}"><span class="expert-box-single">CELPIP</span></li>
-                                                    <li class="{{$user->attr('Duolingo')?'':'disn'}}"><span class="expert-box-single">Duolingo</span></li>
-                                                    <li class="{{$user->attr('TOEIC')?'':'disn'}}"><span class="expert-box-single">TOEIC</span></li>
-                                                    <li class="{{$user->attr('KET')?'':'disn'}}"><span class="expert-box-single">KET</span></li>
-                                                    <li class="{{$user->attr('PET')?'':'disn'}}"><span class="expert-box-single">PET</span></li>
-                                                    <li class="{{$user->attr('CAE')?'':'disn'}}"><span class="expert-box-single">CAE</span></li>
-                                                    <li class="{{$user->attr('FCE')?'':'disn'}}"><span class="expert-box-single">FCE</span></li>
-                                                    <li class="{{$user->attr('CPE')?'':'disn'}}"><span class="expert-box-single">CPE</span></li>
-                                                    <li class="{{$user->attr('BEC')?'':'disn'}}"><span class="expert-box-single">BEC</span></li>
-                                                    <li class="{{$user->attr('TOEFLPhD')?'':'disn'}}"><span class="expert-box-single">TOEFLPhD</span></li>
+                                                    <li class="{{searchForId('TOEFL', $attr_list)?'':'disn'}}"><span class="expert-box-single">TOEFL</span></li>
+                                                    <li class="{{searchForId('IELTS', $attr_list)?'':'disn'}}"><span class="expert-box-single">IELTS</span></li>
+                                                    <li class="{{searchForId('PTE', $attr_list)?'':'disn'}}"><span class="expert-box-single">PTE</span></li>
+                                                    <li class="{{searchForId('GRE', $attr_list)?'':'disn'}}"><span class="expert-box-single">GRE</span></li>
+                                                    <li class="{{searchForId('CELPIP', $attr_list)?'':'disn'}}"><span class="expert-box-single">CELPIP</span></li>
+                                                    <li class="{{searchForId('Duolingo', $attr_list)?'':'disn'}}"><span class="expert-box-single">Duolingo</span></li>
+                                                    <li class="{{searchForId('TOEIC', $attr_list)?'':'disn'}}"><span class="expert-box-single">TOEIC</span></li>
+                                                    <li class="{{searchForId('KET', $attr_list)?'':'disn'}}"><span class="expert-box-single">KET</span></li>
+                                                    <li class="{{searchForId('PET', $attr_list)?'':'disn'}}"><span class="expert-box-single">PET</span></li>
+                                                    <li class="{{searchForId('CAE', $attr_list)?'':'disn'}}"><span class="expert-box-single">CAE</span></li>
+                                                    <li class="{{searchForId('FCE', $attr_list)?'':'disn'}}"><span class="expert-box-single">FCE</span></li>
+                                                    <li class="{{searchForId('CPE', $attr_list)?'':'disn'}}"><span class="expert-box-single">CPE</span></li>
+                                                    <li class="{{searchForId('BEC', $attr_list)?'':'disn'}}"><span class="expert-box-single">BEC</span></li>
+                                                    <li class="{{searchForId('TOEFLPhD', $attr_list)?'':'disn'}}"><span class="expert-box-single">TOEFLPhD</span></li>
 
 
                                                 </ul>
@@ -671,10 +683,10 @@
                                                 </label>
                                                 <ul>
 
-                                                    <li class="{{$user->attr('TCF')?'':'disn'}}"><span class="expert-box-single">TCF</span></li>
-                                                    <li class="{{$user->attr('TEF')?'':'disn'}}"><span class="expert-box-single">TEF</span></li>
-                                                    <li class="{{$user->attr('DELF')?'':'disn'}}"><span class="expert-box-single">DELF</span></li>
-                                                    <li class="{{$user->attr('DALF')?'':'disn'}}"><span class="expert-box-single">DALF</span></li>
+                                                    <li class="{{searchForId('TCF', $attr_list)?'':'disn'}}"><span class="expert-box-single">TCF</span></li>
+                                                    <li class="{{searchForId('TEF', $attr_list)?'':'disn'}}"><span class="expert-box-single">TEF</span></li>
+                                                    <li class="{{searchForId('DELF', $attr_list)?'':'disn'}}"><span class="expert-box-single">DELF</span></li>
+                                                    <li class="{{searchForId('DALF', $attr_list)?'':'disn'}}"><span class="expert-box-single">DALF</span></li>
 
                                                 </ul>
                                             </div>
@@ -682,10 +694,10 @@
                                                 <label for="">آلمانی:
                                                 </label>
                                                 <ul>
-                                                    <li class="{{$user->attr('Goethe')?'':'disn'}}"><span class="expert-box-single">Goethe</span></li>
-                                                    <li class="{{$user->attr('Telc')?'':'disn'}}"><span class="expert-box-single">Telc</span></li>
-                                                    <li class="{{$user->attr('Test_Daf')?'':'disn'}}"><span class="expert-box-single">Test Daf</span></li>
-                                                    <li class="{{$user->attr('OSD')?'':'disn'}}"><span class="expert-box-single">OSD</span></li>
+                                                    <li class="{{searchForId('Goethe', $attr_list)?'':'disn'}}"><span class="expert-box-single">Goethe</span></li>
+                                                    <li class="{{searchForId('Telc', $attr_list)?'':'disn'}}"><span class="expert-box-single">Telc</span></li>
+                                                    <li class="{{searchForId('Test_Daf', $attr_list)?'':'disn'}}"><span class="expert-box-single">Test Daf</span></li>
+                                                    <li class="{{searchForId('OSD', $attr_list)?'':'disn'}}"><span class="expert-box-single">OSD</span></li>
 
 
                                                 </ul>
@@ -694,8 +706,8 @@
                                                 <label for="">ترکی استانبولی:
                                                 </label>
                                                 <ul>
-                                                    <li class="{{$user->attr('TOMER')?'':'disn'}}"><span class="expert-box-single">TOMER</span></li>
-                                                    <li class="{{$user->attr('TYS')?'':'disn'}}"><span class="expert-box-single">TYS</span></li>
+                                                    <li class="{{searchForId('TOMER', $attr_list)?'':'disn'}}"><span class="expert-box-single">TOMER</span></li>
+                                                    <li class="{{searchForId('TYS', $attr_list)?'':'disn'}}"><span class="expert-box-single">TYS</span></li>
 
 
                                                 </ul>
@@ -704,8 +716,8 @@
                                                 <label for="">اسپانیایی:
                                                 </label>
                                                 <ul>
-                                                    <li class="{{$user->attr('DELE')?'':'disn'}}"><span class="expert-box-single">DELE</span></li>
-                                                    <li class="{{$user->attr('SIELE')?'':'disn'}}"><span class="expert-box-single">SIELE</span></li>
+                                                    <li class="{{searchForId('DELE', $attr_list)?'':'disn'}}"><span class="expert-box-single">DELE</span></li>
+                                                    <li class="{{searchForId('SIELE', $attr_list)?'':'disn'}}"><span class="expert-box-single">SIELE</span></li>
 
                                                 </ul>
                                             </div>
@@ -891,7 +903,7 @@
                                             <div class="top">
                                                 <div class="info">
                                                     <div class="author">
-                                                        <div class="img" style="background: url('{{asset('src/avatar/'.$user->attr('avatar'))}}');">
+                                                        <div class="img" style="background: url('{{asset('src/avatar/'.searchForId('avatar', $attr_list))}}');">
 
                                                         </div>
                                                         <span class="name">  {{$article->user->name}}</span>
@@ -998,7 +1010,7 @@
                         <div class="paycontent">
                             <div class="packages">
                                 <h3 class="title">لطفا نوع پکیج مورد نظر را انتخاب کنید</h3>
-                                @if($user->attr('freeclass') !='noclass')
+                                @if(searchForId('freeclass', $attr_list) !='noclass')
                                 <div class="payoption">
                                     <input type="radio" data-off="0" data-count="0" data-sum="{{$user->com_price($user->free_class_price())}}"
                                            name="class_type" id="freeclass" value="freeclass">
@@ -1101,7 +1113,7 @@
 
                                 <div class="payfooter">
                                     <div class="avatar">
-                                        <div class="img" style="background: url('{{asset('/src/avatar/'.$user->attr('avatar'))}}');"></div>
+                                        <div class="img" style="background: url('{{asset('/src/avatar/'.searchForId('avatar', $attr_list))}}');"></div>
                                     </div>
                                     <div class="options">
                                         <ul>
@@ -1384,7 +1396,7 @@
                                         <div>
                                             <div class="payment-sidebar">
                                                 <div class="avatar">
-                                                    <div class="img" style="background: url('{{asset('/src/avatar/'.$user->attr('avatar'))}}');"></div>
+                                                    <div class="img" style="background: url('{{asset('/src/avatar/'.searchForId('avatar', $attr_list))}}');"></div>
                                                     <div class="flag">
                                                         <img src="{{asset('/src/img/lang/'.\App\Models\Language::find($user->languages()->first()->id)->img)}}" alt="">
                                                     </div>

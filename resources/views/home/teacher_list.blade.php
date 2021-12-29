@@ -731,11 +731,25 @@
 
 
         <!-- Start Single Teacher -->
-
+        <?php
+        function searchForId($id, $array) {
+              foreach ($array as $key => $val) {
+                  if ($val['name'] === $id) {
+                      return $val['value'];
+                  }
+              }
+              return null;
+              }
+              // searchForId('avatar', $ar)
+      ?>
         @foreach($teachers as $teacher)
         @if($teacher->languages()->count()==0)
         @continue
+
         @endif
+        <?php
+        $attr_list=$teacher->attributes()->get()->toArray();
+        ?>
 
 
         <div class="single-teacher">
@@ -746,7 +760,7 @@
                             <div class="avatar">
                                 <div class="img">
                                     <span class="online"></span>
-                                    <img src="{{asset('/src/avatar/'.$teacher->attr('avatar'))}}" alt="{{$teacher->name}}">
+                                    <img src="{{asset('/src/avatar/'.searchForId('avatar', $attr_list))}}" alt="{{$teacher->name}}">
                                 </div>
                                 <div class="name">
                                     <h4>
@@ -770,12 +784,12 @@
                                 <div class="rate dishb">
                                     <span class="title">سطوح تدریس :</span>
                                     <span class="val"><b>
-                                            {{$teacher->attr('Starter')=='on'?'(Starter)':''}}
-                                            {{$teacher->attr('Elementary')=='on'?'(Elementary)':''}}
-                                            {{$teacher->attr('Intermediate')=='on'?'(Intermediate)':''}}
-                                            {{$teacher->attr('Upper_intermediate')=='on'?'(Upper intermediate) ':''}}
-                                            {{$teacher->attr('Advanced')=='on'?'(Advanced)':''}}
-                                            {{$teacher->attr('Mastery')=='on'?'(Mastery)':''}}
+                                            {{searchForId('Starter', $attr_list)=='on'?'(Starter)':''}}
+                                            {{searchForId('Elementary', $attr_list)=='on'?'(Elementary)':''}}
+                                            {{searchForId('Intermediate', $attr_list)=='on'?'(Intermediate)':''}}
+                                            {{searchForId('Upper_intermediate', $attr_list)=='on'?'(Upper intermediate) ':''}}
+                                            {{searchForId('Advanced', $attr_list)=='on'?'(Advanced)':''}}
+                                            {{searchForId('Mastery', $attr_list)=='on'?'(Mastery)':''}}
                                         </b></span>
                                 </div>
                                 <div class="rate disnw">
@@ -818,25 +832,25 @@
                                         <li>
                                             <span class="title">سطوح تدریس :</span>
                                             <span class="val"><b>
-                                                    {{$teacher->attr('Starter')=='on'?'(Starter)':''}}
-                                                    {{$teacher->attr('Elementary')=='on'?'(Elementary)':''}}
-                                                    {{$teacher->attr('Intermediate')=='on'?'(Intermediate)':''}}
-                                                    {{$teacher->attr('Upper_intermediate')=='on'?'(Upper intermediate) ':''}}
-                                                    {{$teacher->attr('Advanced')=='on'?'(Advanced)':''}}
-                                                    {{$teacher->attr('Mastery')=='on'?'(Mastery)':''}}
+                                                    {{searchForId('Starter', $attr_list)=='on'?'(Starter)':''}}
+                                                    {{searchForId('Elementary', $attr_list)=='on'?'(Elementary)':''}}
+                                                    {{searchForId('Intermediate', $attr_list)=='on'?'(Intermediate)':''}}
+                                                    {{searchForId('Upper_intermediate', $attr_list)=='on'?'(Upper intermediate) ':''}}
+                                                    {{searchForId('Advanced', $attr_list)=='on'?'(Advanced)':''}}
+                                                    {{searchForId('Mastery', $attr_list)=='on'?'(Mastery)':''}}
                                                 </b></span>
                                         </li>
                                         <li>
                                             <span class="title">لهجه :</span>
                                             <span class="val">
-                                                {{$teacher->attr('American_Accent')=='on'?'(American Accent)':''}}
-                                                {{$teacher->attr('British_Accent')=='on'?'(British Accent)':''}}
-                                                {{$teacher->attr('Australian_Accent')=='on'?'(Australian Accent)':''}}
-                                                {{$teacher->attr('Indian_Accent')=='on'?'(Indian Accent)':''}}
+                                                {{searchForId('American_Accent', $attr_list)=='on'?'(American Accent)':''}}
+                                                {{searchForId('British_Accent', $attr_list)=='on'?'(British Accent)':''}}
+                                                {{searchForId('Australian_Accent', $attr_list)=='on'?'(Australian Accent)':''}}
+                                                {{searchForId('Indian_Accent', $attr_list)=='on'?'(Indian Accent)':''}}
 
-                                                {{$teacher->attr('Irish_Accent')=='on'?'(Irish Accent)':''}}
-                                                {{$teacher->attr('Scottish_Accent')=='on'?'(Scottish Accent)':''}}
-                                                {{$teacher->attr('South_African_Accent')=='on'?'(South African Accent) ':''}}
+                                                {{searchForId('Irish_Accent', $attr_list)=='on'?'(Irish Accent)':''}}
+                                                {{searchForId('Scottish_Accent', $attr_list)=='on'?'(Scottish Accent)':''}}
+                                                {{searchForId('South_African_Accent', $attr_list)=='on'?'(South African Accent) ':''}}
 
                                             </span>
                                         </li>
@@ -893,7 +907,7 @@
 
                                     <div class="trial">
                                         <span class="title">جلسه آزمایشی :</span>
-                                        <span class="val"> {{__('arr.'.$teacher->attr('freeclass'))}}</span>
+                                        <span class="val"> {{__('arr.'.searchForId('freeclass', $attr_list))}}</span>
                                     </div>
                                     <div class="trial" style="float: right">
                                         <span class="title"> یک ساعت :</span>
@@ -944,8 +958,8 @@
                                                     </span>
 
                                                     <div class="video">
-                                                        <video id="player" class="js-player" playsinline controls data-poster="{{asset('/src/port_img/'.$teacher->attr('port_img'))}}">
-                                                            <source src="{{asset('/src/port_vid/'.$teacher->attr('port_vid'))}}" type="video/mp4" />
+                                                        <video id="player" class="js-player" playsinline controls data-poster="{{asset('/src/port_img/'.searchForId('port_img', $attr_list))}}">
+                                                            <source src="{{asset('/src/port_vid/'.searchForId('port_vid', $attr_list))}}" type="video/mp4" />
                                                         </video>
 
                                                     </div>
@@ -966,7 +980,7 @@
                             <div class="tab-nav">
                                 <ul>
                                     <li class="active"><span>ویدیو</span></li>
-                                    <li><span>تقویم</span></li>
+                                    {{-- <li><span>تقویم</span></li> --}}
                                     <li><span>درباره</span></li>
                                 </ul>
                             </div>
@@ -974,14 +988,14 @@
                                 <ul>
                                     <li class="active">
                                         <div>
-                                            <video id="player" class="js-player" playsinline controls data-poster="{{asset('/src/port_img/'.$teacher->attr('port_img'))}}">
-                                                <source src="{{asset('/src/port_vid/'.$teacher->attr('port_vid'))}}" type="video/mp4" />
+                                            <video id="player" class="js-player" playsinline controls data-poster="{{asset('/src/port_img/'.searchForId('port_img', $attr_list))}}">
+                                                <source src="{{asset('/src/port_vid/'.searchForId('port_vid', $attr_list))}}" type="video/mp4" />
 
                                             </video>
 
                                         </div>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <div>
                                             <div class="calendar">
 
@@ -1037,7 +1051,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <div>
                                             <div class="about">

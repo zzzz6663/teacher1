@@ -22,10 +22,10 @@
                             @csrf
                             @method('post')
                         </form>
-                        {{-- <form id="avatf" style="padding: 0" action="{{route('teacher.save.bg',$user->id)}}" enctype="multipart/form-data" method="post">--}}
-                        {{-- @csrf--}}
-                        {{-- @method('post')--}}
-                        {{-- </form>--}}
+                        <form id="avatf" style="padding: 0" action="{{route('teacher.save.bg',$user->id)}}" enctype="multipart/form-data" method="post">
+                        @csrf
+                        @method('post')
+                        </form>
 
                         <form action="{{route('teacher.profile.save.info',$user->id)}}" class="mwidth " method="post">
                             @csrf

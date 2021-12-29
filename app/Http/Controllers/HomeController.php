@@ -481,7 +481,7 @@ class HomeController extends Controller
         $digits = 4;
         $rnd = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
         $invitedUser = new User;
-        $invitedUser->notify(new SendKaveCode($data['mobile'], 'login', $rnd, '', ''));
+        // $invitedUser->notify(new SendKaveCode($data['mobile'], 'login', $rnd, '', ''));
         session()->put('rnd', $rnd);
         session()->put('mobile', $data['mobile']);
         if (isset($data['level'])) {

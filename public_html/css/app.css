@@ -21,6 +21,11 @@
   color: red;
 }
 
+@media screen and (min-width: 1300px) {
+  .plyr {
+    height: 210px;
+  }
+}
 @media screen and (max-width: 600px) {
   .mbp {
     margin-bottom: 100px;

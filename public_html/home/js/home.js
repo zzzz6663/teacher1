@@ -78,18 +78,18 @@ function copyToClipboard2(txt) {
             },
         });
 
-        $('#cover-file').on('change', function () {
-            $('.upload_avatar').show(400)
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                resize.croppie('bind',{
-                    url: e.target.result
-                }).then(function(){
-                    console.log('jQuery bind complete');
-                });
-            }
-            reader.readAsDataURL(this.files[0]);
-        });
+        // $('#cover-file').on('change', function () {
+        //     $('.upload_avatar').show(400)
+        //     var reader = new FileReader();
+        //     reader.onload = function (e) {
+        //         resize.croppie('bind',{
+        //             url: e.target.result
+        //         }).then(function(){
+        //             console.log('jQuery bind complete');
+        //         });
+        //     }
+        //     reader.readAsDataURL(this.files[0]);
+        // });
 
 
         $('.btn-upload-image').on('click', function (ev) {
@@ -323,11 +323,11 @@ function copyToClipboard2(txt) {
             $('#avatarf').submit();
         })
 
-        // $('body').on('change','.avat2',function (e) {
-        //     var element=$(this)
-        //
-        //     $('#avatf').submit();
-        // })
+        $('body').on('change','.avat2',function (e) {
+            var element=$(this)
+
+            $('#avatf').submit();
+        })
 
         $('body').on('click','.popup-container span.close , .close_popup',function (e) {
             $('.popupc').hide(500)

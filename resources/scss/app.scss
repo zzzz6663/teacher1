@@ -18,6 +18,11 @@ margin-right: 0!important;
         color: red;
     }
 }
+@media screen and (min-width: 1300px) {
+    .plyr{
+        height: 210px;
+    }
+}
 @media screen and (max-width: 600px) {
     .mbp{margin-bottom: 100px;}
     .popup .popup-container.user-set-pop .user-set-pop-content form .cover{

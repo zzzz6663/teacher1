@@ -4,6 +4,32 @@
   margin-right: 0 !important;
 }
 
+.lSSlide {
+  height: auto !important;
+}
+
+.bboxf {
+  background: #fff !important;
+  color: #0a8660 !important;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .teacher-sidebar {
+    padding-top: 0 !important;
+  }
+  .teacher-sidebar .video {
+    margin-bottom: 10px;
+  }
+
+  #teacher-about {
+    padding: 0 30px;
+  }
+
+  #teacher-blog {
+    margin-bottom: 0;
+  }
+}
 .red_num {
   position: relative;
 }

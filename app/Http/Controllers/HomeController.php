@@ -403,7 +403,10 @@ class HomeController extends Controller
                 $user->save_attr('visit_profile', $seen + 1);
             }
         }
-        return view('home.teacher.teacher_profile', compact(['user']));
+        $i=0;
+        // $class_list=$user->meets()->where('student_id',null);
+        // dd($class_list);
+        return view('home.teacher.teacher_profile', compact(['user' ]));
     }
     public function teacher_register_form()
     {
@@ -481,7 +484,7 @@ class HomeController extends Controller
         $digits = 4;
         $rnd = rand(pow(10, $digits - 1), pow(10, $digits) - 1);
         $invitedUser = new User;
-        // $invitedUser->notify(new SendKaveCode($data['mobile'], 'login', $rnd, '', ''));
+        $invitedUser->notify(new SendKaveCode($data['mobile'], 'login', $rnd, '', ''));
         session()->put('rnd', $rnd);
         session()->put('mobile', $data['mobile']);
         if (isset($data['level'])) {

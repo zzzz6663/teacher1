@@ -63,7 +63,7 @@ class KaveCode
             $token = str_replace(' ', '', $token);
 
             $result = Kavenegar::VerifyLookup($receptor,($token),$token2,$token3,$template,$type,$token4,$token5);
-            $this->format($result);
+            // $this->format($result);
 
 
 

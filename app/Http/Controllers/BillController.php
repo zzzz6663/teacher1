@@ -69,6 +69,12 @@ class BillController extends Controller
             $meet_id=$request->time;
             $type='reserve_meet';
             $teacher=User::find(Meet::find($meet_id)->user_id);
+            $meet=Meet::find($meet_id);
+            if( $meet->student_id){
+                alert()->error('این کلاس قبلا رزرو شده است');
+                return back();
+            }
+
             if ($count=='0'   ){
                    $free_teacher_reserve=$teacher->meets()->whereType('free')->where('student_id',$user->id)->count();
                     if ($free_teacher_reserve>0){
@@ -76,7 +82,6 @@ class BillController extends Controller
                         return \redirect()->back();
                     }
                     if ( $teacher->attr('freeclass')=='free'){
-                        $meet=Meet::find($meet_id);
                         $meet->update([
                             'student_id'=>$user->id,
                             'type'=>'free'

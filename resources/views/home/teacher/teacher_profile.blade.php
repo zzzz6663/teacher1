@@ -321,76 +321,7 @@
                                         </svg>
                                     </div>
                                     <div class="hours">
-                                        <ul>
-                                            <li>
 
-                                                <span>07:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>08:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>09:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>10:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>11:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>12:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>13:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>14:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>15:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>16:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>17:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>18:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>19:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>20:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>21:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>22:00</span>
-                                            </li>
-                                            <li>
-
-                                                <span>23:00</span>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
                                 <div class="con">
@@ -399,7 +330,7 @@
                                     $m=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند' ];
                                     ?>
                                     <ul class="">
-                                        @for($i=0 ;$i<12;$i++)
+                                        @for($i=0 ;$i<10;$i++)
                                             <li class=" " data-date=" {{\Morilog\Jalali\Jalalian::forge(\Carbon\Carbon::now()->addDay($i))->format('%A, %d %B  ')}} ">
                                                 <?php
                                                 $v=verta(\Carbon\Carbon::now()->addDay($i))
@@ -411,13 +342,40 @@
                                                        {{ $m[$v->month-1] }}
                                                   </span>
                                                 </div>
-                                                @for($p=0 ;$p<35;$p++)
+                                              <?php
+                                            //   ->where('start','>',\Carbon\Carbon::now())
+                                             $list= $user->meets()->where('student_id',null) ->where('start','>',\Carbon\Carbon::now())->where('start','>',\Carbon\Carbon::now()->addDays($i)->startOfDay())->where('start','<',\Carbon\Carbon::now()->addDays($i)->endOfDay()) ->orderBy('start')->get();
+                                              ?>
+                                                @foreach ( $list as $class_li)
+
+                                                  @if(in_array(\Carbon\Carbon::parse($class_li->start)->addMinutes(30) , $list->pluck('start')->toArray()) )
+
+                                                    <div data-level="student" data-id="{{$user->id}}"    class="hour bboxf open " data-cid="{{$class_li->id}}"  data-da="{{\Morilog\Jalali\Jalalian::forge( $class_li->start)->format('%A, %d %B ')}}"  data-time="{{\Carbon\Carbon::parse($class_li->start)->format('H:i')}}" >
+                                                        <input type="checkbox" form="plan" class="op" name="reserve[]" value="{{$class_li->start}}" hidden  >
+                                                        {{\Morilog\Jalali\Jalalian::forge( $class_li->start)->format(' H:i')}}
+                                                         </div>
+                                                         @else
+                                                         <div data-level="student" data-id="{{$user->id}}"    class="hour bboxf open " data-cid="{{$class_li->id}}"  data-da="{{\Morilog\Jalali\Jalalian::forge( $class_li->start)->format('%A, %d %B ')}}"  data-time="{{\Carbon\Carbon::parse($class_li->start)->format('H:i')}}" >
+                                                            <input type="checkbox" form="plan" class="op" name="reserve[]" value="{{$class_li->start}}" hidden  >
+                                                            {{\Morilog\Jalali\Jalalian::forge( $class_li->start)->format(' H:i')}}
+                                                             </div>
+                                                         <div class="hour"></div>
+                                                         <div class="hour"></div>
+
+
+                                                    @endif
+
+
+                                                @endforeach
+
+
+                                                {{-- @for($p=0 ;$p<35;$p++)
                                                       <?php
-                                                        $today= \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00');
-                                                        $today2= \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00');
-                                                        $today4= \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00');
-                                                        $today3= \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00');
-                                                        $today5= \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00');
+                                                        // $today= \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00');
+                                                        // $today2= \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00');
+                                                        // $today4= \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00');
+                                                        // $today3= \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00');
+                                                        // $today5= \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00');
                                                         ?>
                                                     @if($today->addMinutes(($p*30))->greaterThan(\Carbon\Carbon::now() ))
                                                         <div data-level="student" data-id="{{$user->id}}"    class="hour {{($user->empty($today2->addMinutes(($p*30))->format('Y-m-d H:i:s')))?' open ':' '}}  {{($user->reserved($today5->addMinutes(($p*30))->format('Y-m-d H:i:s')))?'  reserved  ':'  '}}" data-cid="{{$user->empty($today4->addMinutes(($p*30))->format('Y-m-d H:i:s'))}}"  data-da="{{\Morilog\Jalali\Jalalian::forge(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00')->addMinutes(($p*30)))->format('%A, %d %B ')}}"  data-time="{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00')->addMinutes(($p*30))->format('H:i:s')}}" >
@@ -428,7 +386,7 @@
                                                             <input type="checkbox" form="plan" class="op" name=" " value="{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', \Carbon\Carbon::now()->addDay($i)  ->format('Y-m-d').' 07:00:00')->addMinutes(($p*30))}}" hidden  >
                                                         </div>
                                                     @endif
-                                                @endfor
+                                                @endfor --}}
 
 
                                             </li>

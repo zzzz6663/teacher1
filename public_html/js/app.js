@@ -1917,7 +1917,7 @@ $('#forwallety').on('change', function () {
 
 if ($('.persian2').length) {
   $(".persian2").persianDatepicker({
-    initialValue: true,
+    initialValue: false,
     format: 'YYYY-MM-DD',
     autoClose: true,
     calendar: {

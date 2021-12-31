@@ -226,6 +226,7 @@ function copyToClipboard2(txt) {
                 inline: true,
             });
         }
+      
         if($("#jtab").length){
             var index=$.cookie('taby');
             console.log(88888888888)

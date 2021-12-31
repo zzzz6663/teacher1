@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="/manager/dist/css/persian-datepicker.min.css">
     <link rel="stylesheet" href="/manager/dist/css/bootstrap-rtl.min.css">
     <!-- template rtl version -->
+    <link rel="stylesheet" href="/home/css/persian-datepicker.css">
     <link rel="stylesheet" href="/manager/dist/css/custom-style.css">
     <link rel="stylesheet" href="/css/app.css">
 

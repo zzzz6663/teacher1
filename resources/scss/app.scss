@@ -2,6 +2,29 @@
 display: block!important;
 margin-right: 0!important;
 }
+.pagi {
+    ul {
+        li {
+            display: inline-block;
+            a {
+                border: 1px solid green;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                display: inline-block;
+                line-height: 30px;
+                border-radius: 10px;
+                color: #0c0c0c;
+            }
+            &.active {
+                a {
+                    color: red;
+                    border: 1px solid red;
+                }
+            }
+        }
+    }
+}
 .lSSlide{
     height: auto!important;
 }
@@ -17,6 +40,8 @@ margin-right: 0!important;
         margin-bottom: 10px;
     }
 }
+
+
 #teacher-about{
     padding: 0 30px;
 }

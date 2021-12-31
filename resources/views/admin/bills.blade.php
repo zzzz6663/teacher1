@@ -9,7 +9,64 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">  لیست تراکنش ها</h3>
+                            <div class="card-header">
+                                <h3 class="card-title">   لیست        تراکنش
+                                </h3>
+                                <br>
+                                <form action="{{route('admin.bills')}}" method="get" autocomplete="off">
+                                    @csrf
+                                    @method('get')
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <label for="from">
+                                                از تاریخ
+                                            </label>
+                                            <input type="text" hidden="" name="filter" value="1"  placeholder="از تاریخ" style="">
+                                            <input type="text" name="from" id="from" value="{{request('from')}}" class="persian3  persian2" placeholder="از تاریخ">
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <label for="to">
+                                                تا تاریخ
+                                            </label>
+                                            <input type="text" name="to" id="to" value="{{request('to')}}" class="persian3  persian2" placeholder="تا تاریخ">
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <label for="">نوع تراکنش</label>
+                                            <select name="type" id="">
+                                                <option value="" >همه موارد</option>
+                                                <option {{request('type')=='reserve_meet'?'selected':''}} value="reserve_meet" >رزرو  کلاس</option>
+                                                <option {{request('type')=='deposit_teacher'?'selected':''}} value="deposit_teacher" >سهم مدرس</option>
+                                                <option {{request('type')=='site_share'?'selected':''}} value="site_share" >سهم اموزشگاه</option>
+                                                <option {{request('type')=='reserve_meet_by_charge'?'selected':''}} value="reserve_meet_by_charge" >رزرو  کلاس با شارژ</option>
+                                                <option {{request('type')=='s_penalty_class'?'selected':''}} value="s_penalty_class" >  بیست درصد کنسلی کلاس     </option>
+                                                <option {{request('type')=='s_penalty_class_remain'?'selected':''}} value="s_penalty_class_remain" >    باقیمانده    جریمه کنسلی کلاس    </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <label for="">  نتیجه تراکنش</label>
+                                            <select name="status" id="">
+                                                <option value="" >همه موارد</option>
+                                                <option {{request('status')=='1'?'selected':''}} value="1" >موفق</option>
+                                                <option {{request('status')=='0'?'selected':''}} value="0" >ناموفق</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text"  name="search" value="{{request('search')}}" class="form-control float-right" placeholder="جستجو">
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    </div>
+
+
+                                <br>
+
+                                </form>
+                            </div>
                            <div class="card-tools">
                                <div class="btn-group-sm">
 
@@ -17,7 +74,7 @@
                                </div>
                            </div>
                             <div class="card-tools">
-                                <form action="{{route('admin.bills')}}" method="get">
+                                {{-- <form action="{{route('admin.bills')}}" method="get">
                                 <div class="input-group input-group-sm" style="width: 150px;">
                                         @method('get')
                                         @csrf
@@ -27,7 +84,7 @@
                                         </div>
                                 </div>
                                 </form>
-                            </div>
+                            </div> --}}
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">

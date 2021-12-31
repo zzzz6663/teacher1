@@ -4,6 +4,24 @@
   margin-right: 0 !important;
 }
 
+.pagi ul li {
+  display: inline-block;
+}
+.pagi ul li a {
+  border: 1px solid green;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  display: inline-block;
+  line-height: 30px;
+  border-radius: 10px;
+  color: #0c0c0c;
+}
+.pagi ul li.active a {
+  color: red;
+  border: 1px solid red;
+}
+
 .lSSlide {
   height: auto !important;
 }

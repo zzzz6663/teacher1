@@ -81,8 +81,8 @@ return [
     'deposit_teacher' => 'سهم مدرس ',
     'site_share' => 'سهم اموزشگاه ',
     'reserve_meet_by_charge' => 'رزرو  کلاس با شارژ ',
-    's_penalty_class' => '      جریمه کنسلی کلاس ',
-    's_penalty_class_remain' => '      جریمه کنسلی کلاس ',
+    's_penalty_class' => '      بیست درصد کنسلی کلاس ',
+    's_penalty_class_remain' => '   باقیمانده    جریمه کنسلی کلاس ',
     'pay' => ' پرداختی',
 
     'no_reserved' => 'رزرو  نشده ',

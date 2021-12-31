@@ -96,7 +96,7 @@ class AdminController extends Controller
         if ($request->type) {
             $bills->where('type', $request->type);
         }
-        if ($request->status==0) {
+        if ($request->status=='0') {
             $status=$request->status;
             $bills->where('status',    $status);
         }

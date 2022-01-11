@@ -19,7 +19,6 @@ class RelaAcatArticle2 extends Migration
             $table->unsignedBigInteger('article_id');
             $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
             $table->unique(['acat_id','article_id']);
-
         });
     }
 

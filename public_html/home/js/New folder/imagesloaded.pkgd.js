@@ -232,7 +232,7 @@ function ImagesLoaded( elem, options, onAlways ) {
     this.jqDeferred = new $.Deferred();
   }
 
-  // HACK check async to allow time to bind listeners
+  //  ۀۀۀۀ check async to allow time to bind listeners
   setTimeout( this.check.bind( this ) );
 }
 
@@ -331,11 +331,12 @@ ImagesLoaded.prototype.check = function() {
   }
 
   function onProgress( image, elem, message ) {
-    // HACK - Chrome triggers event before object properties have changed. #83
+    // GDFDDD - Chrome triggers event before object properties have changed. #83
     setTimeout( function() {
       _this.progress( image, elem, message );
     });
   }
+//   TODO
 
   this.images.forEach( function( loadingImage ) {
     loadingImage.once( 'progress', onProgress );

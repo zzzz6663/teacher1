@@ -1032,11 +1032,11 @@
                     <div class="stat">
                         <ul>
                             <li>
-                                <span class="num">{{$te->count_student(0)}}</span>
+                                <span class="num">{{$te->students(0)}}</span>
                                 <span class="title">زبان آموز</span>
                             </li>
                             <li>
-                                <span class="num">{{$te->down_class()}}</span>
+                                <span class="num">{{$te->passed_class()}}</span>
                                 <span class="title">کلاس برگزارشده</span>
                             </li>
                             <li>
